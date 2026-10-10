@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TikTok 电商视频编导 & 内容主管 | 个人作品集</title>
+  <style>
+    :root {
+      --bg-color: #0b0f19;
+      --card-bg: rgba(22, 28, 45, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent-color: #25f4ee;
+      --accent-pink: #fe2c55;
+      --accent-gradient: linear-gradient(135deg, #25f4ee 0%, #fe2c55 100%);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --radius: 14px;
+      --transition: all 0.25s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* 背景氛围光 */
+    .glow-bg {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at 15% 15%, rgba(37, 244, 238, 0.08) 0%, transparent 45%),
+                  radial-gradient(circle at 85% 30%, rgba(254, 44, 85, 0.08) 0%, transparent 40%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(11, 15, 25, 0.85);
+      border-bottom: 1px solid var(--card-border);
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-tag {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* 个人主视觉区 (Hero) */
+    .hero {
+      padding: 70px 0 50px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(37, 244, 238, 0.1);
+      border: 1px solid rgba(37, 244, 238, 0.25);
+      color: var(--accent-color);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 18px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero h1 span {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: 0 auto 30px;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 11px 26px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: #0b0f19;
+    }
+
+    .btn-primary:hover {
+      background: #e5e7eb;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      border: 1px solid var(--card-border);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* 核心数据看板 */
+    .metrics-section {
+      padding: 40px 0;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .metric-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .metric-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--accent-gradient);
+      opacity: 0.8;
+    }
+
+    .metric-num {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+
+    .metric-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent-color);
+      margin-bottom: 6px;
+    }
+
+    .metric-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* 通用模块标题 */
+    .section-title {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+    }
+
+    /* 案例展示区 */
+    .cases-section {
+      padding: 60px 0;
+    }
+
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 22px;
+    }
+
+    .case-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .case-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(37, 244, 238, 0.3);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.4);
+    }
+
+    .case-media {
+      width: 100%;
+      height: 200px;
+      background: #151b2e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      position: relative;
+      border-bottom: 1px solid var(--card-border);
+      overflow: hidden;
+    }
+
+    .badge-float {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      color: var(--accent-color);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .case-body {
+      padding: 22px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .case-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .case-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .tag-item {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    .case-summary {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    .case-link-btn {
+      color: #fff;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+      align-self: flex-start;
+    }
+
+    .case-link-btn:hover {
+      color: var(--accent-color);
+    }
+
+    /* SOP与团队管理模块 */
+    .sop-section {
+      padding: 60px 0;
+    }
+
+    .sop-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .sop-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .sop-icon {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .sop-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+
+    .sop-card ul {
+      list-style: none;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .sop-card li {
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .sop-card li::before {
+      content: "•";
+      color: var(--accent-color);
+      position: absolute;
+      left: 0;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    /* 底部联系方式 */
+    footer {
+      border-top: 1px solid var(--card-border);
+      background: rgba(11, 15, 25, 0.95);
+      padding: 60px 0 40px;
+      margin-top: 40px;
+    }
+
+    .contact-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      padding: 10px 18px;
+      border-radius: 8px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .contact-item:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--accent-color);
+    }
+
+    .copyright {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-top: 36px;
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding: 45px 0 35px;
+      }
+      .metric-num {
+        font-size: 1.85rem;
+      }
+      nav a {
+        margin-left: 12px;
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-bg"></div>
+
+  <!-- 顶部导航 -->
+  <header>
+    <div class="nav-container">
+      <div class="brand">
+        <span>PORTFOLIO</span>
+        <span class="brand-tag">// TikTok E-commerce</span>
+      </div>
+      <nav>
+        <a href="#metrics">核心战绩</a>
+        <a href="#cases">爆款案例</a>
+        <a href="#sop">团队SOP</a>
+        <a href="#contact">联系我</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- 个人介绍 / Hero -->
+    <section class="hero">
+      <span class="badge">🔥 专注 TikTok 电商短视频 · 自然流全链路闭环</span>
+      <h1>短视频编导 & <span>内容主管</span></h1>
+      <p>
+        深耕 TikTok 跨境电商短视频冷启动与矩阵化打法。具备“0对标破局打样、爆款脚本创作、精细化SOP沉淀及团队规模化产出”全流程操盘经验，以数据驱动自然流高投产变现。
+      </p>
+      <div class="cta-group">
+        <a href="#cases" class="btn btn-primary">查看精选案例 →</a>
+        <a href="#contact" class="btn btn-outline">获取完整作品集 / 简历</a>
+      </div>
+    </section>
+
+    <!-- 核心业务数据看板 -->
+    <section id="metrics" class="metrics-section">
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-num">30W+ $</div>
+          <div class="metric-label">月度稳定 GMV</div>
+          <div class="metric-desc">统筹矩阵账号，主导自然流长效转化基本盘</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-num">120+ 条</div>
+          <div class="metric-label">部门日均产能</div>
+          <div class="metric-desc">规范化置景拍摄剪辑流水线，实现人效最大化</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-num">100W+ 播放</div>
+          <div class="metric-label">单条爆款破局</div>
+          <div class="metric-desc">16天无对标从0到1摸索，单视频转化1.3W+刀</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-num">4+ 核心品类</div>
+          <div class="metric-label">成熟爆款模型</div>
+          <div class="metric-desc">涵盖母婴（学步车/摇篮）、小家电（净水器/原汁机）</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 爆款案例精选 -->
+    <section id="cases" class="cases-section">
+      <h2 class="section-title">🎬 精选爆款案例</h2>
+      <p class="section-desc">每个品类亲自完成从 0 到 1 的打样测试，跑通完播率与转化闭环后实现标准化平移。</p>
+
+      <div class="cases-grid">
+        <!-- 案例 1 -->
+        <div class="case-card">
+          <div class="case-media">
+            <span>[ 可替换：学步车视频封面 / GIF ]</span>
+            <span class="badge-float">单条 GMV $13,000+</span>
+          </div>
+          <div class="case-body">
+            <h3 class="case-title">母婴·学步车：16天从0到1冷启动小爆款</h3>
+            <div class="case-tags">
+              <span class="tag-item">自然流破局</span>
+              <span class="tag-item">自编自导自剪</span>
+              <span class="tag-item">播放量 100W+</span>
+            </div>
+            <p class="case-summary">
+              在公司无模板、行业无明确对标背景下入局。通过前3秒“痛点提问+强烈视觉对比”切入，16天内单视频跑出100W播放，单条转化GMV破1.3万美元，跑通该品类第一套爆款模板。
+            </p>
+            <a href="javascript:void(0)" class="case-link-btn">▶ 点击查看视频样片 / 脚本分析</a>
+          </div>
+        </div>
+
+        <!-- 案例 2 -->
+        <div class="case-card">
+          <div class="case-media">
+            <span>[ 可替换：小家电展示画面 / 截图 ]</span>
+            <span class="badge-float">矩阵日产 120+</span>
+          </div>
+          <div class="case-body">
+            <h3 class="case-title">智能小家电：空气净化器 & 原汁机矩阵打法</h3>
+            <div class="case-tags">
+              <span class="tag-item">沉浸式测评</span>
+              <span class="tag-item">痛点解决</span>
+              <span class="tag-item">SOP平移</span>
+            </div>
+            <p class="case-summary">
+              提炼“强生活场景+直观功能实测+爽感画面”黄金三段式脚本，形成标准置景与灯光指南，成功平移给团队剪辑与编导，实现高频稳定出单。
+            </p>
+            <a href="javascript:void(0)" class="case-link-btn">▶ 点击查看视频样片 / 脚本分析</a>
+          </div>
+        </div>
+
+        <!-- 案例 3 -->
+        <div class="case-card">
+          <div class="case-media">
+            <span>[ 可替换：婴儿摇篮 / 数据后台截图 ]</span>
+            <span class="badge-float">月销 $300,000+</span>
+          </div>
+          <div class="case-body">
+            <h3 class="case-title">高客单母婴：三代学步车 & 智能摇篮长效转化</h3>
+            <div class="case-tags">
+              <span class="tag-item">高客单转化</span>
+              <span class="tag-item">A/B测试排期</span>
+              <span class="tag-item">长效带货</span>
+            </div>
+            <p class="case-summary">
+              优化视频发布时间差、标签打法与带货小黄车挂载节奏。结合数据看板动态优化完播率和CTR，推动整个母婴品类短视频GMV长期稳定在30W+美元。
+            </p>
+            <a href="javascript:void(0)" class="case-link-btn">▶ 点击查看视频样片 / 脚本分析</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOP 与团队管理 -->
+    <section id="sop" class="sop-section">
+      <h2 class="section-title">⚙️ 爆款SOP与团队管理体系</h2>
+      <p class="section-desc">不仅具备一线自编自导能力，更擅长将个人爆款经验提炼为制度化人效增长模型。</p>
+
+      <div class="sop-grid">
+        <div class="sop-card">
+          <div class="sop-icon">🎯</div>
+          <h3>主管前置打样与SOP输出</h3>
+          <ul>
+            <li>新入局品类由主管亲自切入跑通闭环，避免团队盲目试错</li>
+            <li>沉淀包含“Hook设计、主体痛点、CTA结尾”标准化脚本库</li>
+            <li>定制化编写《拍摄布光与置景指导手册》，保证出片质感</li>
+          </ul>
+        </div>
+
+        <div class="sop-card">
+          <div class="sop-icon">⚡</div>
+          <h3>产能爬坡与团队传帮带</h3>
+          <ul>
+            <li>搭建高效产研链路，推动团队日产稳定达 120+ 条精细化视频</li>
+            <li>针对编导新人与剪辑师进行手把手培训，快速拉齐出片审美</li>
+            <li>建立素材复用与二创拆解逻辑，最大化素材利用率</li>
+          </ul>
+        </div>
+
+        <div class="sop-card">
+          <div class="sop-icon">📊</div>
+          <h3>数据监测与动态复盘机制</h3>
+          <ul>
+            <li>建立全量视频追踪表格：核心监测完播率、互动率、CTR及GMV</li>
+            <li>每日发布节奏精细化调优（时区发布、标题与封面A/B测试）</li>
+            <li>每周组织数据复盘会，依数据快速淘汰低效内容，强化高产模板</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 底部联系方式 -->
+  <footer id="contact">
+    <div class="container">
+      <div class="contact-card">
+        <h2 style="font-size: 1.5rem; margin-bottom: 8px;">期待与优秀的团队同行</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          随时欢迎探讨 TikTok 短视频电商、爆款内容打法及团队搭建
+        </p>
+        <div class="contact-links">
+          <a href="mailto:your-email@example.com" class="contact-item">
+            <span>✉️ 邮箱：your-email@example.com</span>
+          </a>
+          <a href="tel:13800000000" class="contact-item">
+            <span>📱 微信 / 电话：138-xxxx-xxxx</span>
+          </a>
+          <a href="https://v.douyin.com/" target="_blank" class="contact-item">
+            <span>🔗 飞书/云盘完整作品集</span>
+          </a>
+        </div>
+      </div>
+      <div class="copyright">
+        © 2026 TikTok E-commerce Director Portfolio · All Rights Reserved
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
